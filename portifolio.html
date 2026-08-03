@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-BR" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="Portfólio de Julia Silva de Oliveira — Analista de Dados / Data Science. Projetos, trajetória e habilidades.">
+<title>Julia Silva de Oliveira · Portfólio de Dados</title>
+<script>
+ (function(){
+ try{
+ var t=localStorage.getItem('julia-theme')||'light';
+ document.documentElement.setAttribute('data-theme',t);
+ var l=localStorage.getItem('julia-lang')||'pt';
+ document.documentElement.setAttribute('lang', l==='en'?'en':'pt-BR');
+ }catch(e){}
+ })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+ :root{
+ --orange:#ec6f00;--orange-2:#d95f00;--blue:#2f6bff;--navy:#0b3b6f;--green:#2f9e44;
+ --bg:#f4f7fc;--bg-2:#ffffff;--surface:#ffffff;--surface-2:#eef3fa;
+ --line:rgba(12,32,64,.10);--text:#132540;--muted:#5a6b84;
+ --nav-bg:rgba(255,255,255,.82);--hover-bg:rgba(12,32,64,.05);
+ --shadow:0 18px 45px rgba(20,45,90,.10);
+ --radius:18px;--maxw:1120px;color-scheme:light;
+ }
+ :root[data-theme="dark"]{
+ --orange:#ff8a1f;--orange-2:#ec7000;--blue:#4f82ff;--navy:#0b3b6f;--green:#3f9b46;
+ --bg:#0a1524;--bg-2:#0d1b2e;--surface:#132339;--surface-2:#182d49;
+ --line:rgba(255,255,255,.08);--text:#eaf1fb;--muted:#9fb2ca;
+ --nav-bg:rgba(10,21,36,.82);--hover-bg:rgba(255,255,255,.06);
+ --shadow:0 18px 50px rgba(0,0,0,.35);color-scheme:dark;
+ }
+ @media (prefers-color-scheme: dark){
+ :root:not([data-theme]){
+ --orange:#ff8a1f;--orange-2:#ec7000;--blue:#4f82ff;--green:#3f9b46;
+ --bg:#0a1524;--bg-2:#0d1b2e;--surface:#132339;--surface-2:#182d49;
+ --line:rgba(255,255,255,.08);--text:#eaf1fb;--muted:#9fb2ca;
+ --nav-bg:rgba(10,21,36,.82);--hover-bg:rgba(255,255,255,.06);
+ --shadow:0 18px 50px rgba(0,0,0,.35);color-scheme:dark;
+ }
+ }
+ *{box-sizing:border-box;margin:0;padding:0}
+ html{scroll-behavior:smooth}
+ body{
+ font-family:"Poppins","Segoe UI",system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif;
+ background:
+ radial-gradient(1100px 600px at 85% -10%, rgba(236,111,0,.12), transparent 60%),
+ radial-gradient(900px 500px at 0% 20%, rgba(47,107,255,.10), transparent 55%),
+ var(--bg);
+ color:var(--text);line-height:1.65;overflow-x:hidden;transition:background .4s ease, color .3s ease;
+ }
+ a{color:inherit;text-decoration:none}
+ .wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:24px}
+ section{padding-block:88px;scroll-margin-top:80px}
+ .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:.78rem;font-weight:700;
+ letter-spacing:.12em;text-transform:uppercase;color:var(--orange);margin-bottom:14px}
+ .eyebrow::before{content:"";width:26px;height:3px;border-radius:3px;background:var(--orange)}
+ h2.title{font-size:clamp(1.7rem,3.4vw,2.5rem);font-weight:700;letter-spacing:-.02em;line-height:1.1}
+ .lead{color:var(--muted);max-width:640px;margin-top:14px;font-size:1.02rem}
+
+ /* NAV */
+ header.nav{position:fixed;inset:0 0 auto 0;z-index:50;transition:background .25s, box-shadow .25s, backdrop-filter .25s}
+ header.nav.scrolled{background:var(--nav-bg);backdrop-filter:blur(12px);
+ border-bottom:1px solid var(--line);box-shadow:0 8px 30px rgba(0,0,0,.12)}
+ .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;gap:14px}
+ .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em}
+ .brand .mark{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;
+ background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#fff;font-size:.85rem;
+ font-weight:700;box-shadow:0 6px 16px rgba(236,111,0,.35)}
+ .nav-right{display:flex;align-items:center;gap:14px}
+ .nav-links{display:flex;align-items:center;gap:4px}
+ .nav-links a{color:var(--muted);font-size:.92rem;font-weight:500;padding:9px 13px;border-radius:10px;
+ transition:color .2s, background .2s}
+ .nav-links a:hover{color:var(--text);background:var(--hover-bg)}
+ .nav-cta{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#fff !important;
+ box-shadow:0 8px 20px rgba(236,111,0,.3);font-weight:600 !important}
+ .nav-cta:hover{filter:brightness(1.06)}
+ .nav-controls{display:flex;gap:8px;align-items:center}
+ .ctl{min-width:38px;height:38px;padding-inline:9px;border-radius:10px;border:1px solid var(--line);
+ background:var(--surface);color:var(--text);font-weight:700;font-size:.82rem;cursor:pointer;
+ display:grid;place-items:center;transition:border-color .2s, transform .15s}
+ .ctl:hover{border-color:var(--orange);transform:translateY(-1px)}
+ .burger{display:none;flex-direction:column;gap:5px;background:none;border:0;cursor:pointer;padding:8px}
+ .burger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:.25s}
+
+/* HERO */
+ .hero{position:relative;padding-block:150px 90px;overflow:hidden}
+ .blob{position:absolute;z-index:0;pointer-events:none}
+ .blob.b1{width:340px;height:340px;right:-70px;top:40px;
+ background:linear-gradient(140deg,var(--orange),#ff9a3d);border-radius:60% 40% 55% 45%/55% 45% 60% 40%;opacity:.22;filter:blur(6px)}
+ .blob.b2{width:260px;height:260px;right:180px;top:230px;
+ background:linear-gradient(140deg,#0b3b6f,#155fae);border-radius:52% 48% 40% 60%/45% 55% 45% 55%;opacity:.20;filter:blur(4px)}
+ .blob.b3{width:180px;height:180px;left:-60px;bottom:-40px;
+ background:linear-gradient(140deg,var(--blue),#5b8bff);border-radius:50%;opacity:.16;filter:blur(8px)}
+ .hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.35fr .85fr;gap:48px;align-items:center}
+ .hero h1{font-size:clamp(2.4rem,6vw,4.1rem);font-weight:800;letter-spacing:-.03em;line-height:1.02}
+ .hero h1 .accent{color:var(--orange)}
+ .role{display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 10px}
+ .role span{font-size:.86rem;font-weight:600;color:var(--text);background:var(--surface);
+ border:1px solid var(--line);padding:7px 13px;border-radius:999px}
+ .hero p.sub{color:var(--muted);font-size:1.1rem;max-width:560px;margin-top:14px}
+ .cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+ .btn{display:inline-flex;align-items:center;gap:9px;font-weight:600;font-size:.96rem;padding:13px 22px;
+ border-radius:12px;cursor:pointer;transition:transform .18s, filter .18s, background .2s;border:1px solid transparent}
+ .btn:hover{transform:translateY(-2px)}
+ .btn.primary{background:linear-gradient(135deg,var(--orange),var(--orange-2));color:#fff;box-shadow:0 12px 28px rgba(236,111,0,.32)}
+ .btn.ghost{background:transparent;border-color:var(--line);color:var(--text)}
+ .btn.ghost:hover{background:var(--hover-bg)}
+ .stack-note{margin-top:26px;color:var(--muted);font-size:.9rem;font-style:italic;max-width:520px}
+
+ .avatar-card{position:relative;display:grid;place-items:center}
+ .avatar{width:min(320px,80%);aspect-ratio:1;border-radius:30px;position:relative;overflow:hidden;
+ border:1px solid var(--line);box-shadow:var(--shadow);display:grid;place-items:center}
+ .avatar .ring{position:absolute;inset:-2px;border-radius:32px;
+ background:conic-gradient(from 200deg,var(--orange),var(--blue),var(--navy),var(--orange));opacity:.5;filter:blur(14px)}
+ .avatar .photo{position:relative;z-index:1;width:100%;height:100%;object-fit:cover;border-radius:30px}
+ .avatar .tag{position:absolute;bottom:14px;left:50%;transform:translateX(-50%);z-index:2;
+ background:var(--surface);border:1px solid var(--line);padding:6px 14px;border-radius:999px;
+ font-size:.76rem;font-weight:600;color:var(--muted);white-space:nowrap;box-shadow:0 6px 16px rgba(0,0,0,.12)}
+
+ /* STATS */
+ .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:56px;position:relative;z-index:2}
+ .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 20px;text-align:center;box-shadow:var(--shadow)}
+ .stat b{display:block;font-size:2rem;font-weight:800;color:var(--orange);letter-spacing:-.02em}
+ .stat span{color:var(--muted);font-size:.86rem}
+
+ /* ABOUT */
+ .about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;margin-top:36px}
+ .about-grid p{color:var(--muted);margin-bottom:14px}
+ .about-grid p strong{color:var(--text);font-weight:600}
+ .facts{display:grid;gap:12px}
+ .fact{display:flex;gap:13px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 17px}
+ .fact .ic{flex:none;width:36px;height:36px;border-radius:10px;display:grid;place-items:center;
+ background:rgba(236,111,0,.14);font-size:1.1rem}
+ .fact b{font-size:.95rem;font-weight:600}
+ .fact small{color:var(--muted);display:block}
+ .value-box{margin-top:26px;background:linear-gradient(135deg,rgba(236,111,0,.12),rgba(47,107,255,.08));
+ border:1px solid rgba(236,111,0,.25);border-radius:16px;padding:20px 24px}
+ .value-box b{color:var(--orange)}
+
+ /* SKILLS */
+ .skill-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+ .skill{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;transition:transform .2s, border-color .2s;box-shadow:var(--shadow)}
+ .skill:hover{transform:translateY(-4px);border-color:rgba(236,111,0,.4)}
+ .skill h3{font-size:1.05rem;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+ .skill h3 .dot{width:10px;height:10px;border-radius:50%;background:var(--orange);flex:none}
+ .chips{display:flex;flex-wrap:wrap;gap:8px}
+ .chip{font-size:.82rem;font-weight:500;color:var(--text);background:var(--surface-2);border:1px solid var(--line);padding:6px 12px;border-radius:9px}
+
+ /* TIMELINE */
+ .timeline{margin-top:44px;position:relative;padding-left:6px}
+ .tl-item{position:relative;padding:0 0 34px 34px;border-left:2px solid var(--line)}
+ .tl-item:last-child{border-left-color:transparent}
+ .tl-item::before{content:"";position:absolute;left:-9px;top:2px;width:16px;height:16px;border-radius:50%;
+ background:var(--orange);box-shadow:0 0 0 5px rgba(236,111,0,.18)}
+ .tl-when{font-size:.8rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+ .tl-item h4{margin:4px 0 8px;font-size:1.12rem;font-weight:600}
+ .tl-item ul{list-style:none;display:grid;gap:6px}
+ .tl-item li{color:var(--muted);position:relative;padding-left:18px}
+ .tl-item li::before{content:"▸";position:absolute;left:0;color:var(--orange)}
+
+/* PROJECTS */
+ .proj-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:36px}
+ .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;
+ display:flex;flex-direction:column;transition:transform .22s, border-color .22s, box-shadow .22s;box-shadow:var(--shadow)}
+ .card:hover{transform:translateY(-6px);border-color:rgba(236,111,0,.4)}
+ .card .top{padding:22px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px}
+ .card .badge{font-size:.72rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+ .badge.ml{background:rgba(47,107,255,.15);color:#2f6bff}
+ .badge.bi{background:rgba(236,111,0,.16);color:#d95f00}
+ .badge.nlp{background:rgba(47,158,68,.16);color:#2f9e44}
+ .badge.auto{background:rgba(124,92,255,.16);color:#7c5cff}
+ .card .ic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-size:1.3rem;
+ background:linear-gradient(135deg,rgba(236,111,0,.18),rgba(47,107,255,.12))}
+ .card .body{padding:16px 24px 24px}
+ .card h3{font-size:1.28rem;font-weight:700;letter-spacing:-.01em;margin-bottom:8px}
+ .card p{color:var(--muted);font-size:.95rem}
+ .card .tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
+ .card .tags span{font-size:.76rem;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);padding:4px 10px;border-radius:8px}
+ .card .impact{margin-top:14px;font-size:.9rem;color:var(--green);font-weight:600;display:flex;align-items:flex-start;gap:7px}
+
+ /* DELIVERIES */
+ .adhoc{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:36px}
+ .adhoc div{display:flex;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px 16px;color:var(--muted);font-size:.94rem}
+ .adhoc div .n{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:.82rem;color:#fff;background:linear-gradient(135deg,var(--orange),var(--orange-2))}
+
+ /* RECOGNITION */
+ .rec-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:36px}
+ .approved{background:linear-gradient(135deg,rgba(47,158,68,.14),rgba(47,107,255,.08));border:1px solid rgba(47,158,68,.3);border-radius:16px;padding:26px}
+ .approved .pill{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:.82rem;color:var(--green);
+ background:rgba(47,158,68,.18);padding:6px 13px;border-radius:999px;margin-bottom:14px}
+ .approved h3{font-size:1.22rem;font-weight:600;margin-bottom:6px}
+ .approved .score{font-size:2.6rem;font-weight:800;color:var(--green);letter-spacing:-.02em;line-height:1}
+ .approved .score small{font-size:.9rem;color:var(--muted);font-weight:500}
+ .approved ul{list-style:none;margin-top:16px;display:grid;gap:8px}
+ .approved li{color:var(--muted);font-size:.9rem;padding-left:20px;position:relative}
+ .approved li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800}
+ .quotes{display:grid;gap:14px}
+ .quote{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--orange);border-radius:12px;padding:16px 18px}
+ .quote p{font-size:.95rem;font-style:italic}
+ .quote span{display:block;margin-top:8px;font-size:.82rem;color:var(--muted);font-weight:600;font-style:normal}
+
+ /* FUTURE */
+ .future-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+ .future{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px;text-align:center;transition:transform .2s,border-color .2s;box-shadow:var(--shadow)}
+ .future:hover{transform:translateY(-4px);border-color:rgba(236,111,0,.4)}
+ .future .ic{width:52px;height:52px;border-radius:14px;margin:0 auto 16px;display:grid;place-items:center;font-size:1.5rem;
+ background:linear-gradient(135deg,rgba(236,111,0,.18),rgba(47,107,255,.12))}
+ .future h3{font-size:1.1rem;font-weight:600;margin-bottom:10px}
+ .future p{color:var(--muted);font-size:.9rem}
+
+ /* CONTACT */
+ .contact-card{background:linear-gradient(140deg,var(--surface),var(--bg-2));border:1px solid var(--line);
+ border-radius:26px;padding:56px 40px;text-align:center;position:relative;box-shadow:var(--shadow)}
+ .contact-card h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:800;letter-spacing:-.02em}
+ .contact-card p.ct{color:var(--muted);max-width:520px;margin:14px auto 0}
+ .contact-actions{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:30px}
+ .placeholder-note{margin-top:22px;font-size:.82rem;color:var(--muted)}
+ .placeholder-note code{background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--orange)}
+
+ /* FOOTER */
+ footer{border-top:1px solid var(--line);padding-block:36px;text-align:center;color:var(--muted)}
+ footer .big{font-size:1.6rem;font-weight:800;color:var(--text);letter-spacing:-.02em;margin-bottom:6px}
+ footer .big .cur{color:var(--orange)}
+
+ /* REVEAL */
+ .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease}
+ .reveal.in{opacity:1;transform:none}
+
+ /* RESPONSIVE */
+ @media(max-width:900px){
+ .hero-grid{grid-template-columns:1fr;text-align:center}
+ .avatar-card{order:-1}
+ .role,.cta-row{justify-content:center}
+ .hero p.sub,.stack-note{margin-inline:auto}
+ .about-grid,.rec-grid{grid-template-columns:1fr}
+ .skill-grid,.future-grid{grid-template-columns:1fr 1fr}
+ .stats{grid-template-columns:1fr 1fr}
+ }
+ @media(max-width:680px){
+ .nav-links{position:fixed;inset:68px 0 auto 0;flex-direction:column;align-items:stretch;gap:4px;
+ background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+ padding:14px 22px;transform:translateY(-140%);transition:transform .3s ease;z-index:40}
+ .nav-links.open{transform:translateY(0)}
+ .nav-links a{padding:12px 14px}
+ .burger{display:flex}
+ .proj-grid,.adhoc,.skill-grid,.future-grid,.stats{grid-template-columns:1fr}
+ section{padding-block:64px}
+ }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+ <div class="wrap nav-inner">
+ <a class="brand" href="#top"><span class="mark">JO</span><span>Julia Oliveira</span></a>
+ <div class="nav-right">
+ <nav class="nav-links" id="menu">
+ <a href="#sobre" data-i18n="nav.about">Sobre</a>
+ <a href="#skills" data-i18n="nav.skills">Skills</a>
+ <a href="#trajetoria" data-i18n="nav.journey">Trajetória</a>
+ <a href="#projetos" data-i18n="nav.projects">Projetos</a>
+ <a href="#reconhecimentos" data-i18n="nav.recognition">Reconhecimentos</a>
+ <a href="#contato" class="nav-cta" data-i18n="nav.contact">Contato</a>
+ </nav>
+ <div class="nav-controls">
+ <button class="ctl" id="langBtn" aria-label="Trocar idioma">EN</button>
+ <button class="ctl" id="themeBtn" aria-label="Alternar tema">🌙</button>
+ </div>
+ <button class="burger" id="burger" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+ </div>
+ </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+ <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+ <div class="wrap">
+ <div class="hero-grid">
+ <div>
+ <span class="eyebrow" data-i18n="hero.eyebrow">Analista de Dados · Data Science</span>
+ <h1 class="hero-title reveal reveal-delay-1">
+ <span data-pt="Transformar vidas com ">Transformar vidas com </span><span
+ class="accent"
+ data-pt="tecnologia.">tecnologia.</span>
+ </h1>
+ <div class="role">
+ <span data-i18n="hero.role1">📊 Análise de Dados</span>
+ <span data-i18n="hero.role2">🤖 Machine Learning</span>
+ <span data-i18n="hero.role3">☁️ Cloud</span>
+ <span data-i18n="hero.role4">📈 Power BI</span>
+ </div>
+ <p class="sub" data-i18n="hero.sub">Estagiária em Análise de Dados no Itaú — Abertura de Contas PJ, Chapter de Processos SEPJ. Transformo dados em dashboards, automações e decisões com impacto real.</p>
+ <div class="cta-row">
+ <a href="#projetos" class="btn primary" data-i18n="hero.cta1">Ver projetos →</a>
+ <a href="#contato" class="btn ghost" data-i18n="hero.cta2">Fale comigo</a>
+ </div>
+
+ </div>
+ <div class="avatar-card">
+ <div class="avatar">
+ <div class="ring"></div>
+ <img class="photo" src="Julia Oliveira.jfif" alt="Foto de Julia Silva de Oliveira">
+ <div class="tag">Data · Analytics · Cloud</div>
+ </div>
+ </div>
+ </div>
+ <div class="stats reveal">
+ <div class="stat"><b>+6</b><span data-i18n="stat1.l">projetos de dados</span></div>
+ <div class="stat"><b>R$54K</b><span data-i18n="stat2.l">desoneração gerada</span></div>
+ <div class="stat"><b>21</b><span data-i18n="stat3.l">anos</span></div>
+ <div class="stat"><b>2021→26</b><span data-i18n="stat4.l">trajetória em tech</span></div>
+ </div>
+ </div>
+</section>
+
+<!-- ABOUT -->
+<section id="sobre">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="about.eyebrow">Sobre mim</span>
+ <h2 class="title" data-i18n="about.title">Quem sou eu?</h2>
+ <div class="about-grid reveal">
+ <div>
+ <p data-i18n="about.p1"><strong>Formada em Data Science na FIAP</strong> — bolsista Prouni 100% pela nota do Enem — e <strong>Técnica em Desenvolvimento Web pelo Senac Lapa Tito.</strong></p>
+ <p data-i18n="about.p2">Conheci tecnologia aos 16 anos, em 2021, e desde então mergulhei de cabeça: participo de eventos como <strong>TDC, AWS Summit, Web Summit, Google Summit e Campus Party</strong>, organizo encontros e já participei de vários hackathons.</p>
+ <p data-i18n="about.p3">Minha stack do dia a dia gira em torno de <strong>SQL, Python, Machine Learning, Deep Learning</strong> e nuvem (<strong>AWS, Azure e OCI</strong>), sempre com foco em análise de dados e visualização.</p>
+ <div class="value-box"><p data-i18n="about.value"><b>Como agrego valor:</b> sou curiosa, proativa, compartilho conhecimento e tenho autonomia responsável.</p></div>
+ </div>
+ <div class="facts">
+ <div class="fact"><span class="ic">🎓</span><div><b data-i18n="fact1.t">Formação</b><small data-i18n="fact1.d">Data Science (FIAP) · Desenvolvimento Web (Senac)</small></div></div>
+ <div class="fact"><span class="ic">🎤</span><div><b data-i18n="fact2.t">Comunidade Tech</b><small data-i18n="fact2.d">Palestras, hackathons e administração de comunidade</small></div></div>
+ <div class="fact"><span class="ic">🐱</span><div><b data-i18n="fact3.t">Fora do código</b><small data-i18n="fact3.d">Duas gatas, música e livros de suspense</small></div></div>
+ <div class="fact"><span class="ic">🚀</span><div><b data-i18n="fact4.t">Mindset</b><small data-i18n="fact4.d">Curiosa, proativa e com autonomia responsável</small></div></div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="skills.eyebrow">Habilidades</span>
+ <h2 class="title" data-i18n="skills.title">Stack &amp; competências</h2>
+ <p class="lead" data-i18n="skills.lead">Ferramentas e técnicas que uso para tirar valor dos dados — da coleta ao dashboard.</p>
+ <div class="skill-grid reveal">
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill1.h">Linguagens &amp; Dados</span></h3>
+ <div class="chips"><span class="chip">SQL</span><span class="chip">Python</span><span class="chip">Excel</span><span class="chip" data-i18n="chip.datamodel">Modelagem de Dados</span></div></div>
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill2.h">Machine &amp; Deep Learning</span></h3>
+ <div class="chips"><span class="chip">Machine Learning</span><span class="chip">Deep Learning</span><span class="chip">CNN</span><span class="chip" data-i18n="chip.nn">Redes Neurais</span><span class="chip" data-i18n="chip.cluster">Clusterização</span></div></div>
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill3.h">Cloud</span></h3>
+ <div class="chips"><span class="chip">AWS</span><span class="chip">Azure</span><span class="chip">OCI</span><span class="chip">Google Cloud Storage</span></div></div>
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill4.h">BI &amp; Visualização</span></h3>
+ <div class="chips"><span class="chip">Power BI</span><span class="chip">Dashboards</span><span class="chip">Data Viz</span></div></div>
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill5.h">Analytics avançado</span></h3>
+ <div class="chips"><span class="chip">NLP</span><span class="chip" data-i18n="chip.sentiment">Análise de Sentimentos</span><span class="chip" data-i18n="chip.segment">Segmentação</span></div></div>
+ <div class="skill"><h3><span class="dot"></span><span data-i18n="skill6.h">Engenharia &amp; Governança</span></h3>
+ <div class="chips"><span class="chip">SOR / SOT / SPEC</span><span class="chip">Data Mesh</span><span class="chip">FinOps</span><span class="chip" data-i18n="chip.semi">Dados semi-estruturados</span></div></div>
+ </div>
+ </div>
+</section>
+
+<!-- JOURNEY -->
+<section id="trajetoria">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="journey.eyebrow">Linha do tempo</span>
+ <h2 class="title" data-i18n="journey.title">Minha trajetória</h2>
+ <div class="timeline reveal">
+ <div class="tl-item">
+ <div class="tl-when" data-i18n="tl1.when">2024 · 1º Semestre</div>
+ <h4 data-i18n="tl1.h">O início na tecnologia</h4>
+ <ul><li data-i18n="tl1.li1">Aprovada no Programa Prouni 100% — pela nota do Enem</li><li data-i18n="tl1.li2">Início da graduação em Tecnólogo em Data Science</li></ul>
+ </div>
+ <div class="tl-item">
+ <div class="tl-when" data-i18n="tl2.when">2024 · 2º Semestre</div>
+ <h4 data-i18n="tl2.h">Aprofundamento</h4>
+ <ul><li data-i18n="tl2.li1">Aprovada no ProProfissão</li><li data-i18n="tl2.li2">Aprofundamento em tecnologia no geral</li></ul>
+ </div>
+ <div class="tl-item">
+ <div class="tl-when" data-i18n="tl3.when">2024 · Final do ano</div>
+ <h4 data-i18n="tl3.h">Primeiros grandes projetos</h4>
+ <ul><li data-i18n="tl3.li1">Projeto final do Proa Demoday</li><li data-i18n="tl3.li2">Entrega do Projeto Challenge — FIAP</li></ul>
+ </div>
+ <div class="tl-item">
+ <div class="tl-when" data-i18n="tl4.when">2025 · 1º Semestre</div>
+ <h4 data-i18n="tl4.h">Estágio de Análise de Dados — Itaú</h4>
+ <ul><li data-i18n="tl4.li1">Construção de dashboards, incluindo monitoração de casos de fraude na abertura de contas</li><li data-i18n="tl4.li2">Apoio na cronoanálise de desoneração comercial — uma OKR que ajudei a atingir</li><li data-i18n="tl4.li3">Mensuração de benefícios na implantação de bot no WhatsApp</li></ul>
+ </div>
+ <div class="tl-item">
+ <div class="tl-when" data-i18n="tl5.when">2025 · 2º Semestre</div>
+ <h4 data-i18n="tl5.h">Consolidação</h4>
+ <ul><li data-i18n="tl5.li1">Último ano da faculdade</li><li data-i18n="tl5.li2">Entrega do projeto de Clusterização TOTVS</li><li data-i18n="tl5.li3">Administradora de comunidade Tech</li></ul>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projetos">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="projects.eyebrow">Portfólio</span>
+ <h2 class="title" data-i18n="projects.title">Projetos em destaque</h2>
+ <p class="lead" data-i18n="projects.lead">Uma seleção de projetos de dados, machine learning e BI que construí — no Itaú e na jornada acadêmica.</p>
+ <div class="proj-grid reveal">
+
+ <div class="card">
+ <div class="top"><span class="ic">🌧️</span><span class="badge ml">Machine Learning</span></div>
+ <div class="body">
+ <h3>StormSense</h3>
+ <p data-i18n="p1.desc">Projeto de previsão de desastres que cruza imagens de árvores, dados de bueiros entupidos e dados meteorológicos para estimar a probabilidade de queda de árvores e inundações — usando redes neurais, CNN e aprendizado de máquina.</p>
+ <div class="tags"><span>CNN</span><span data-i18n="tag.nn">Redes Neurais</span><span>Google Cloud</span><span>Power BI</span><span>Minsait</span></div>
+ <div class="impact" data-i18n="p1.impact">◆ Da ingestão à visualização: entrada, ML, armazenamento em nuvem e saída em dashboard</div>
+ </div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="ic">🛡️</span><span class="badge bi">Dashboard / BI</span></div>
+ <div class="body">
+ <h3 data-i18n="p2.title">Dashboard de Fraudes</h3>
+ <p data-i18n="p2.desc">Centraliza e visualiza os principais indicadores relacionados à ocorrência de fraudes, detectando padrões anômalos na abertura de contas.</p>
+ <div class="tags"><span>Power BI</span><span data-i18n="tag.indicators">Indicadores</span><span data-i18n="tag.anomaly">Detecção de Anomalias</span></div>
+ <div class="impact" data-i18n="p2.impact">◆ Reduziu o tempo de consulta e habilitou análise contínua por segmento de cliente</div>
+ </div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="ic">🔎</span><span class="badge bi">Dashboard / BI</span></div>
+ <div class="body">
+ <h3 data-i18n="p3.title">Dashboard de PLD e Fraudes</h3>
+ <p data-i18n="p3.desc">Análise de propostas recusadas com visão de origem, motivo de recusa e risco de PLD, apoiando decisões de prevenção à lavagem de dinheiro e fraude.</p>
+ <div class="tags"><span>Power BI</span><span data-i18n="tag.aml">PLD</span><span data-i18n="tag.proposals">Análise de Propostas</span></div>
+ <div class="impact" data-i18n="p3.impact">◆ Visão consolidada e filtrável das propostas recusadas</div>
+ </div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="ic">📟</span><span class="badge bi" data-i18n="badge.indicators">Indicadores</span></div>
+ <div class="body">
+ <h3 data-i18n="p4.title">Painel Indicador Middle e Esteiras</h3>
+ <p data-i18n="p4.desc">Painel de FUP com indicadores de reversão, retrabalho, contato com cliente (Verint), ItaúSign e pendências — acompanhado de um glossário completo dos indicadores.</p>
+ <div class="tags"><span>Power BI</span><span>Salesforce</span><span>FUP</span><span data-i18n="tag.glossary">Glossário</span></div>
+ <div class="impact" data-i18n="p4.impact">◆ Padroniza a leitura dos indicadores operacionais do time</div>
+ </div>
+ </div>
+
+<div class="card">
+ <div class="top"><span class="ic">💬</span><span class="badge nlp">NLP</span></div>
+ <div class="body">
+ <h3>SentiClick</h3>
+ <p data-i18n="p5.desc">Solução analítica que eleva a segmentação ao integrar dados internos de comportamento (engajamento, suporte, NPS) com menções públicas no Reclame Aqui, usando NLP para extrair sentimentos, tópicos e localização.</p>
+ <div class="tags"><span>NLP</span><span data-i18n="tag.segment">Segmentação</span><span>NPS</span><span>Reclame Aqui</span><span>TOTVS</span></div>
+ <div class="impact" data-i18n="p5.impact">◆ Correlação direta que explicou o comportamento de grupos de clientes</div>
+ </div>
+ </div>
+
+ <div class="card">
+ <div class="top"><span class="ic">🗳️</span><span class="badge auto" data-i18n="badge.automation">Automação</span></div>
+ <div class="body">
+ <h3 data-i18n="p6.title">Contas Eleitorais</h3>
+ <p data-i18n="p6.desc">Apoio na jornada de abertura de contas eleitorais, com fluxo automatizado e portal dedicado que simplifica a formalização.</p>
+ <div class="tags"><span data-i18n="tag.automation">Automação</span><span>Portal</span><span data-i18n="tag.processes">Processos</span></div>
+ <div class="impact" data-i18n="p6.impact">◆ R$54K de desoneração comercial e zero retrabalho na formalização</div>
+ </div>
+ </div>
+
+ </div>
+ </div>
+</section>
+
+<!-- DELIVERIES -->
+<section id="entregas">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="adhoc.eyebrow">Ad Hoc</span>
+ <h2 class="title" data-i18n="adhoc.title">Entregas pontuais</h2>
+ <p class="lead" data-i18n="adhoc.lead">Além dos projetos, análises e reports sob demanda que realizei no dia a dia.</p>
+ <div class="adhoc reveal">
+ <div><span class="n">1</span><span data-i18n="ah1">Report semanal de Fraudes</span></div>
+ <div><span class="n">2</span><span data-i18n="ah2">Nova versão da análise de sócios únicos</span></div>
+ <div><span class="n">3</span><span data-i18n="ah3">Análise de Representantes × Titulares de Cartões PJ</span></div>
+ <div><span class="n">4</span><span data-i18n="ah4">Análise de propostas com devolução pela mesa (origens rede e gerente)</span></div>
+ <div><span class="n">5</span><span data-i18n="ah5">Parametrização da PAC Física — construção e validação</span></div>
+ <div><span class="n">6</span><span data-i18n="ah6">Apoio no estudo de contas eleitorais</span></div>
+ <div><span class="n">7</span><span data-i18n="ah7">Report semanal de dados SISPAG</span></div>
+ <div><span class="n">8</span><span data-i18n="ah8">Análise de aberturas de conta liberadas e tipos de formalização</span></div>
+ </div>
+ </div>
+</section>
+
+<!-- RECOGNITION -->
+<section id="reconhecimentos">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="rec.eyebrow">Reconhecimentos</span>
+ <h2 class="title" data-i18n="rec.title">Aprovações &amp; feedbacks</h2>
+ <div class="rec-grid reveal">
+ <div class="approved">
+ <span class="pill" data-i18n="rec.pill">✅ Aprovada</span>
+ <h3 data-i18n="rec.h">Governança de Carreira — Engenharia de Dados &amp; Analytics</h3>
+ <div class="score">84<small data-i18n="rec.score"> / nota no bate-papo técnico</small></div>
+ <ul>
+ <li data-i18n="rec.li1">Boa base conceitual em SOR, SOT e SPEC, com respostas assertivas</li>
+ <li data-i18n="rec.li2">Modelagem de dados nos níveis conceitual, lógico e físico</li>
+ <li data-i18n="rec.li3">Aderência a dados semi-estruturados dentro do esperado</li>
+ <li data-i18n="rec.li4">Destaque em Princípios de Data Mesh — bem preparada e com profundidade</li>
+ <li data-i18n="rec.li5">Boa compreensão de FinOps e Data Viz com gráfico de dispersão</li>
+ </ul>
+ </div>
+ <div class="quotes">
+ <div class="quote"><p data-i18n="q1.t">"Ju, parabéns por hoje. Adorei a proatividade e principalmente a tempestividade."</p><span>— Ricardo Silva</span></div>
+ <div class="quote"><p data-i18n="q2.t">"Ajudou demais, Ju. Parabéns!"</p><span>— Emanuel Souza Sobral</span></div>
+ <div class="quote"><p data-i18n="q3.t">"Boa, Ju! Parabéns migos, obrigada pela parceria e agilidade."</p><span>— Juliana Nunes da Costa</span></div>
+ </div>
+ </div>
+ </div>
+</section>
+
+<!-- FUTURE -->
+<section id="futuro">
+ <div class="wrap">
+ <span class="eyebrow" data-i18n="future.eyebrow">Próximos passos</span>
+ <h2 class="title" data-i18n="future.title">Para onde eu vou</h2>
+ <div class="future-grid reveal">
+ <div class="future"><span class="ic">🎯</span><h3 data-i18n="f1.h">Me tornar júnior</h3><p data-i18n="f1.p">Plano de estudos e trilhas de carreira, mentorias e aprendizado contínuo sobre o dia a dia da área.</p></div>
+ <div class="future"><span class="ic">📜</span><h3 data-i18n="f2.h">Tirar certificações</h3><p data-i18n="f2.p">AWS Certified AI Practitioner e AWS Certified Cloud Practitioner (Foundational).</p></div>
+ <div class="future"><span class="ic">🤝</span><h3 data-i18n="f3.h">Iniciativas de Analytics</h3><p data-i18n="f3.p">Participar de iniciativas de Analytics dentro do banco, com mentoria focada e troca de conhecimento entre pares.</p></div>
+ </div>
+ </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contato">
+ <div class="wrap">
+ <div class="contact-card reveal">
+ <span class="eyebrow" style="justify-content:center" data-i18n="contact.eyebrow">Vamos conversar</span>
+ <h2 data-i18n="contact.title">Bora trocar sobre dados? 💛</h2>
+ <p class="ct" data-i18n="contact.p">Estou sempre aberta a novos projetos, aprendizados e conexões na comunidade tech. É só me chamar.</p>
+ <div class="contact-actions">
+ <a href="mailto:julia.b.silva-oliveira@itau-unibanco.com.br" class="btn primary" data-i18n="contact.cta">✉️ Enviar e-mail</a>
+ <a href="https://www.linkedin.com/in/julia-soliveira-/" class="btn ghost" >LinkedIn</a>
+ <a href="https://github.com/jvbsz" class="btn ghost">GitHub</a>
+ </div>
+
+ </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+ <div class="wrap">
+ <div class="big" data-i18n="footer.big">Obrigada<span class="cur">_</span> ;)</div>
+ <div data-i18n="footer.sub">Julia Silva de Oliveira · Portfólio de Dados</div>
+ </div>
+</footer>
+
+<script>
+ var THEME_KEY='julia-theme', LANG_KEY='julia-lang';
+ var themeBtn=document.getElementById('themeBtn');
+ var langBtn=document.getElementById('langBtn');
+ var currentTheme='light', currentLang='pt';
+
+var dict={
+ "nav.about":{pt:`Sobre`,en:`About`},
+ "nav.skills":{pt:`Skills`,en:`Skills`},
+ "nav.journey":{pt:`Trajetória`,en:`Journey`},
+ "nav.projects":{pt:`Projetos`,en:`Projects`},
+ "nav.recognition":{pt:`Reconhecimentos`,en:`Recognition`},
+ "nav.contact":{pt:`Contato`,en:`Contact`},
+
+ "hero.eyebrow":{pt:`Analista de Dados · Data Science`,en:`Data Analyst · Data Science`},
+ "hero.role1":{pt:`📊 Análise de Dados`,en:`📊 Data Analysis`},
+ "hero.role2":{pt:`🤖 Machine Learning`,en:`🤖 Machine Learning`},
+ "hero.role3":{pt:`☁️ Cloud`,en:`☁️ Cloud`},
+ "hero.role4":{pt:`📈 Power BI`,en:`📈 Power BI`},
+ "hero.sub":{pt:`Estagiária em Análise de Dados no Itaú — Abertura de Contas PJ, Chapter de Processos SEPJ. Transformo dados em dashboards, automações e decisões com impacto real.`,en:`Data Analysis intern at Itaú — Corporate (PJ) Account Opening, SEPJ Process Chapter. I turn data into dashboards, automations, and decisions with real impact.`},
+ "hero.cta1":{pt:`Ver projetos →`,en:`View projects →`},
+ "hero.cta2":{pt:`Fale comigo`,en:`Get in touch`},
+ "hero.quote":{pt:`"desde criança eu sonhava em trabalhar com Excel e Power BI" 💛`,en:`"ever since I was a kid, I dreamed of working with Excel and Power BI" 💛`},
+
+ "stat1.l":{pt:`projetos de dados`,en:`data projects`},
+ "stat2.l":{pt:`desoneração gerada`,en:`cost savings generated`},
+ "stat3.l":{pt:`Anos`,en:`Years`},
+ "stat4.l":{pt:`trajetória em tech`,en:`journey in tech`},
+
+ "about.eyebrow":{pt:`Sobre mim`,en:`About me`},
+ "about.title":{pt:`Quem sou eu?`,en:`Who am I?`},
+ "about.p1":{pt:`<strong>Formada em Data Science na FIAP</strong> — bolsista Prouni 100% pela nota do Enem — e <strong>Técnica em Desenvolvimento Web pelo Senac Lapa Tito.</strong>`,en:`<strong>Data Science graduate from FIAP</strong> — a 100% Prouni scholarship holder based on my Enem score — and a <strong>Web Development Technician from Senac Lapa Tito.</strong>`},
+ "about.p2":{pt:`Conheci tecnologia aos 16 anos, em 2021, e desde então mergulhei de cabeça: participo de eventos como <strong>TDC, AWS Summit, Web Summit, Google Summit e Campus Party</strong>, organizo encontros e já participei de vários hackathons.`,en:`I discovered tech at 16, back in 2021, and dove in headfirst ever since: I attend events like <strong>TDC, AWS Summit, Web Summit, Google Summit and Campus Party</strong>, I organize meetups, and I've taken part in several hackathons.`},
+ "about.p3":{pt:`Minha stack do dia a dia gira em torno de <strong>SQL, Python, Machine Learning, Deep Learning</strong> e nuvem (<strong>AWS, Azure e OCI</strong>), sempre com foco em análise de dados e visualização.`,en:`My day-to-day stack revolves around <strong>SQL, Python, Machine Learning, Deep Learning</strong> and the cloud (<strong>AWS, Azure and OCI</strong>), always focused on data analysis and visualization.`},
+ "about.value":{pt:`<b>Como agrego valor:</b> sou curiosa, proativa, compartilho conhecimento e tenho autonomia responsável.`,en:`<b>How I add value:</b> I'm curious, proactive, I share knowledge, and I have responsible autonomy.`},
+ "fact1.t":{pt:`Formação`,en:`Education`},
+ "fact1.d":{pt:`Data Science (FIAP) · Desenvolvimento Web (Senac)`,en:`Data Science (FIAP) · Web Development (Senac)`},
+ "fact2.t":{pt:`Comunidade Tech`,en:`Tech Community`},
+ "fact2.d":{pt:`Palestras, hackathons e administração de comunidade`,en:`Talks, hackathons, and community management`},
+ "fact3.t":{pt:`Fora do código`,en:`Beyond the code`},
+ "fact3.d":{pt:`Duas gatas, música e livros de suspense`,en:`Two cats, music, and thriller books`},
+ "fact4.t":{pt:`Mindset`,en:`Mindset`},
+ "fact4.d":{pt:`Curiosa, proativa e com autonomia responsável`,en:`Curious, proactive, with responsible autonomy`},
+
+ "skills.eyebrow":{pt:`Habilidades`,en:`Skills`},
+ "skills.title":{pt:`Stack &amp; competências`,en:`Stack &amp; skills`},
+ "skills.lead":{pt:`Ferramentas e técnicas que uso para tirar valor dos dados — da coleta ao dashboard.`,en:`Tools and techniques I use to extract value from data — from collection to dashboard.`},
+ "skill1.h":{pt:`Linguagens &amp; Dados`,en:`Languages &amp; Data`},
+ "skill2.h":{pt:`Machine &amp; Deep Learning`,en:`Machine &amp; Deep Learning`},
+ "skill3.h":{pt:`Cloud`,en:`Cloud`},
+ "skill4.h":{pt:`BI &amp; Visualização`,en:`BI &amp; Visualization`},
+ "skill5.h":{pt:`Analytics avançado`,en:`Advanced Analytics`},
+ "skill6.h":{pt:`Engenharia &amp; Governança`,en:`Engineering &amp; Governance`},
+ "chip.datamodel":{pt:`Modelagem de Dados`,en:`Data Modeling`},
+ "chip.nn":{pt:`Redes Neurais`,en:`Neural Networks`},
+ "chip.cluster":{pt:`Clusterização`,en:`Clustering`},
+ "chip.sentiment":{pt:`Análise de Sentimentos`,en:`Sentiment Analysis`},
+ "chip.segment":{pt:`Segmentação`,en:`Segmentation`},
+ "chip.semi":{pt:`Dados semi-estruturados`,en:`Semi-structured Data`},
+
+ "journey.eyebrow":{pt:`Linha do tempo`,en:`Timeline`},
+ "journey.title":{pt:`Minha trajetória`,en:`My journey`},
+ "tl1.when":{pt:`2024 · 1º Semestre`,en:`2024 · 1st Half`},
+ "tl1.h":{pt:`O início na tecnologia`,en:`Getting started in tech`},
+ "tl1.li1":{pt:`Aprovada no Programa Prouni 100% — pela nota do Enem`,en:`Awarded a 100% Prouni scholarship — based on my Enem score`},
+ "tl1.li2":{pt:`Início da graduação em Tecnólogo em Data Science`,en:`Started my Data Science technology degree`},
+ "tl2.when":{pt:`2024 · 2º Semestre`,en:`2024 · 2nd Half`},
+ "tl2.h":{pt:`Aprofundamento`,en:`Going deeper`},
+ "tl2.li1":{pt:`Aprovada no ProProfissão`,en:`Selected for ProProfissão`},
+ "tl2.li2":{pt:`Aprofundamento em tecnologia no geral`,en:`Deepened my knowledge across tech`},
+ "tl3.when":{pt:`2024 · Final do ano`,en:`2024 · End of year`},
+ "tl3.h":{pt:`Primeiros grandes projetos`,en:`First major projects`},
+ "tl3.li1":{pt:`Projeto final do Proa Demoday`,en:`Final project at Proa Demoday`},
+ "tl3.li2":{pt:`Entrega do Projeto Challenge — FIAP`,en:`Delivered the Challenge Project — FIAP`},
+ "tl4.when":{pt:`2025 · 1º Semestre`,en:`2025 · 1st Half`},
+ "tl4.h":{pt:`Estágio de Análise de Dados — Itaú`,en:`Data Analysis Internship — Itaú`},
+ "tl4.li1":{pt:`Construção de dashboards, incluindo monitoração de casos de fraude na abertura de contas`,en:`Built dashboards, including monitoring of fraud cases in account opening`},
+ "tl4.li2":{pt:`Apoio na cronoanálise de desoneração comercial — uma OKR que ajudei a atingir`,en:`Supported the time-analysis of commercial cost relief — an OKR I helped achieve`},
+ "tl4.li3":{pt:`Mensuração de benefícios na implantação de bot no WhatsApp`,en:`Measured the benefits of deploying a WhatsApp bot`},
+ "tl5.when":{pt:`2025 · 2º Semestre`,en:`2025 · 2nd Half`},
+ "tl5.h":{pt:`Consolidação`,en:`Consolidation`},
+ "tl5.li1":{pt:`Último ano da faculdade`,en:`Final year of college`},
+ "tl5.li2":{pt:`Entrega do projeto de Clusterização TOTVS`,en:`Delivered the TOTVS clustering project`},
+ "tl5.li3":{pt:`Administradora de comunidade Tech`,en:`Tech community administrator`},
+
+"projects.eyebrow":{pt:`Portfólio`,en:`Portfolio`},
+ "projects.title":{pt:`Projetos em destaque`,en:`Featured projects`},
+ "projects.lead":{pt:`Uma seleção de projetos de dados, machine learning e BI que construí — no Itaú e na jornada acadêmica.`,en:`A selection of data, machine learning, and BI projects I've built — at Itaú and throughout my academic journey.`},
+ "p1.desc":{pt:`Projeto de previsão de desastres que cruza imagens de árvores, dados de bueiros entupidos e dados meteorológicos para estimar a probabilidade de queda de árvores e inundações — usando redes neurais, CNN e aprendizado de máquina.`,en:`A disaster-prediction project that combines images of trees, data on clogged drains, and weather data to estimate the probability of falling trees and floods — using neural networks, CNNs, and machine learning.`},
+ "p1.impact":{pt:`◆ Da ingestão à visualização: entrada, ML, armazenamento em nuvem e saída em dashboard`,en:`◆ From ingestion to visualization: input, ML, cloud storage, and dashboard output`},
+ "tag.nn":{pt:`Redes Neurais`,en:`Neural Networks`},
+ "p2.title":{pt:`Dashboard de Fraudes`,en:`Fraud Dashboard`},
+ "p2.desc":{pt:`Centraliza e visualiza os principais indicadores relacionados à ocorrência de fraudes, detectando padrões anômalos na abertura de contas.`,en:`Centralizes and visualizes the key indicators related to fraud occurrences, detecting anomalous patterns in account opening.`},
+ "tag.indicators":{pt:`Indicadores`,en:`Indicators`},
+ "tag.anomaly":{pt:`Detecção de Anomalias`,en:`Anomaly Detection`},
+ "p2.impact":{pt:`◆ Reduziu o tempo de consulta e habilitou análise contínua por segmento de cliente`,en:`◆ Cut lookup time and enabled continuous analysis by customer segment`},
+ "p3.title":{pt:`Dashboard de PLD e Fraudes`,en:`AML &amp; Fraud Dashboard`},
+ "p3.desc":{pt:`Análise de propostas recusadas com visão de origem, motivo de recusa e risco de PLD, apoiando decisões de prevenção à lavagem de dinheiro e fraude.`,en:`Analysis of rejected applications by origin, rejection reason, and AML risk, supporting anti-money-laundering and fraud-prevention decisions.`},
+ "tag.aml":{pt:`PLD`,en:`AML`},
+ "tag.proposals":{pt:`Análise de Propostas`,en:`Application Analysis`},
+ "p3.impact":{pt:`◆ Visão consolidada e filtrável das propostas recusadas`,en:`◆ A consolidated, filterable view of rejected applications`},
+ "badge.indicators":{pt:`Indicadores`,en:`Indicators`},
+ "p4.title":{pt:`Painel Indicador Middle e Esteiras`,en:`Middle &amp; Pipeline Indicator Panel`},
+ "p4.desc":{pt:`Painel de FUP com indicadores de reversão, retrabalho, contato com cliente (Verint), ItaúSign e pendências — acompanhado de um glossário completo dos indicadores.`,en:`A follow-up (FUP) panel with reversal, rework, customer-contact (Verint), ItaúSign, and pending indicators — paired with a complete glossary of the metrics.`},
+ "tag.glossary":{pt:`Glossário`,en:`Glossary`},
+ "p4.impact":{pt:`◆ Padroniza a leitura dos indicadores operacionais do time`,en:`◆ Standardizes how the team reads operational indicators`},
+ "p5.desc":{pt:`Solução analítica que eleva a segmentação ao integrar dados internos de comportamento (engajamento, suporte, NPS) com menções públicas no Reclame Aqui, usando NLP para extrair sentimentos, tópicos e localização.`,en:`An analytics solution that levels up segmentation by integrating internal behavioral data (engagement, support, NPS) with public mentions on Reclame Aqui, using NLP to extract sentiment, topics, and location.`},
+ "tag.segment":{pt:`Segmentação`,en:`Segmentation`},
+ "p5.impact":{pt:`◆ Correlação direta que explicou o comportamento de grupos de clientes`,en:`◆ A direct correlation that explained the behavior of customer groups`},
+ "badge.automation":{pt:`Automação`,en:`Automation`},
+ "p6.title":{pt:`Contas Eleitorais`,en:`Electoral Accounts`},
+ "p6.desc":{pt:`Apoio na jornada de abertura de contas eleitorais, com fluxo automatizado e portal dedicado que simplifica a formalização.`,en:`Support for the electoral-account opening journey, with an automated flow and a dedicated portal that simplifies formalization.`},
+ "tag.automation":{pt:`Automação`,en:`Automation`},
+ "tag.processes":{pt:`Processos`,en:`Processes`},
+ "p6.impact":{pt:`◆ R$54K de desoneração comercial e zero retrabalho na formalização`,en:`◆ R$54K in commercial cost savings and zero rework in formalization`},
+
+ "adhoc.eyebrow":{pt:`Ad Hoc`,en:`Ad Hoc`},
+ "adhoc.title":{pt:`Entregas pontuais`,en:`Ad hoc deliveries`},
+ "adhoc.lead":{pt:`Além dos projetos, análises e reports sob demanda que realizei no dia a dia.`,en:`Beyond the projects, here are on-demand analyses and reports I delivered day to day.`},
+ "ah1":{pt:`Report semanal de Fraudes`,en:`Weekly fraud report`},
+ "ah2":{pt:`Nova versão da análise de sócios únicos`,en:`New version of the single-partner analysis`},
+ "ah3":{pt:`Análise de Representantes × Titulares de Cartões PJ`,en:`Analysis of Representatives × Corporate cardholders`},
+ "ah4":{pt:`Análise de propostas com devolução pela mesa (origens rede e gerente)`,en:`Analysis of applications returned by the desk (branch and manager origins)`},
+ "ah5":{pt:`Parametrização da PAC Física — construção e validação`,en:`Physical PAC parameterization — build and validation`},
+ "ah6":{pt:`Apoio no estudo de contas eleitorais`,en:`Support on the electoral-accounts study`},
+ "ah7":{pt:`Report semanal de dados SISPAG`,en:`Weekly SISPAG data report`},
+ "ah8":{pt:`Análise de aberturas de conta liberadas e tipos de formalização`,en:`Analysis of approved account openings and formalization types`},
+
+ "rec.eyebrow":{pt:`Reconhecimentos`,en:`Recognition`},
+ "rec.title":{pt:`Aprovações &amp; feedbacks`,en:`Approvals &amp; feedback`},
+ "rec.pill":{pt:`✅ Aprovada`,en:`✅ Approved`},
+ "rec.h":{pt:`Governança de Carreira — Engenharia de Dados &amp; Analytics`,en:`Career Governance — Data &amp; Analytics Engineering`},
+ "rec.score":{pt:` / nota no bate-papo técnico`,en:` / score in the technical interview`},
+ "rec.li1":{pt:`Boa base conceitual em SOR, SOT e SPEC, com respostas assertivas`,en:`Solid conceptual grounding in SOR, SOT, and SPEC, with assertive answers`},
+ "rec.li2":{pt:`Modelagem de dados nos níveis conceitual, lógico e físico`,en:`Data modeling at the conceptual, logical, and physical levels`},
+ "rec.li3":{pt:`Aderência a dados semi-estruturados dentro do esperado`,en:`Handling of semi-structured data as expected`},
+ "rec.li4":{pt:`Destaque em Princípios de Data Mesh — bem preparada e com profundidade`,en:`Standout on Data Mesh principles — well prepared and in depth`},
+ "rec.li5":{pt:`Boa compreensão de FinOps e Data Viz com gráfico de dispersão`,en:`Good grasp of FinOps and Data Viz with scatter plots`},
+ "q1.t":{pt:`"Ju, parabéns por hoje. Adorei a proatividade e principalmente a tempestividade."`,en:`"Ju, congrats on today. I loved your proactivity and, above all, your timeliness."`},
+ "q2.t":{pt:`"Ajudou demais, Ju. Parabéns!"`,en:`"You helped so much, Ju. Congrats!"`},
+ "q3.t":{pt:`"Boa, Ju! Parabéns migos, obrigada pela parceria e agilidade."`,en:`"Nice, Ju! Congrats team, thanks for the partnership and agility."`},
+
+"future.eyebrow":{pt:`Próximos passos`,en:`Next steps`},
+ "future.title":{pt:`Para onde eu vou`,en:`Where I'm headed`},
+ "f1.h":{pt:`Me tornar júnior`,en:`Become a junior`},
+ "f1.p":{pt:`Plano de estudos e trilhas de carreira, mentorias e aprendizado contínuo sobre o dia a dia da área.`,en:`A study plan and career tracks, mentorships, and continuous learning about the day-to-day of the field.`},
+ "f2.h":{pt:`Tirar certificações`,en:`Get certified`},
+ "f2.p":{pt:`AWS Certified AI Practitioner e AWS Certified Cloud Practitioner (Foundational).`,en:`AWS Certified AI Practitioner and AWS Certified Cloud Practitioner (Foundational).`},
+ "f3.h":{pt:`Iniciativas de Analytics`,en:`Analytics initiatives`},
+ "f3.p":{pt:`Participar de iniciativas de Analytics dentro do banco, com mentoria focada e troca de conhecimento entre pares.`,en:`Take part in Analytics initiatives within the bank, with focused mentorship and peer knowledge-sharing.`},
+
+ "contact.eyebrow":{pt:`Vamos conversar`,en:`Let's talk`},
+ "contact.title":{pt:`Bora trocar sobre dados? 💛`,en:`Let's talk data? 💛`},
+ "contact.p":{pt:`Estou sempre aberta a novos projetos, aprendizados e conexões na comunidade tech. É só me chamar.`,en:`I'm always open to new projects, learning, and connections in the tech community. Just reach out.`},
+ "contact.cta":{pt:`✉️ Enviar e-mail`,en:`✉️ Send email`},
+ "contact.note":{pt:`Dica: troque os links de <code>LinkedIn</code> e <code>GitHub</code> pelo endereço dos seus perfis antes de publicar.`,en:`Tip: swap the <code>LinkedIn</code> and <code>GitHub</code> links for your own profile URLs before publishing.`},
+
+ "footer.big":{pt:`Obrigada<span class="cur">_</span> ;)`,en:`Thank you<span class="cur">_</span> ;)`},
+ "footer.sub":{pt:`Julia Silva de Oliveira · Portfólio de Dados`,en:`Julia Silva de Oliveira · Data Portfolio`}
+ };
+
+ function applyLang(lang){
+ document.querySelectorAll('[data-i18n]').forEach(function(el){
+ var k=el.getAttribute('data-i18n');
+ if(dict[k] && dict[k][lang]!=null){ el.innerHTML=dict[k][lang]; }
+ });
+ document.documentElement.setAttribute('lang', lang==='en'?'en':'pt-BR');
+ document.title = lang==='en' ? 'Julia Silva de Oliveira · Data Portfolio' : 'Julia Silva de Oliveira · Portfólio de Dados';
+ langBtn.textContent = lang==='en' ? 'PT' : 'EN';
+ try{ localStorage.setItem(LANG_KEY, lang); }catch(e){}
+ currentLang=lang;
+ }
+ function applyTheme(theme){
+ document.documentElement.setAttribute('data-theme', theme);
+ themeBtn.textContent = theme==='dark' ? '☀️' : '🌙';
+ try{ localStorage.setItem(THEME_KEY, theme); }catch(e){}
+ currentTheme=theme;
+ }
+
+ var savedTheme='light', savedLang='pt';
+ try{ savedTheme=localStorage.getItem(THEME_KEY)||'light'; savedLang=localStorage.getItem(LANG_KEY)||'pt'; }catch(e){}
+ applyTheme(savedTheme);
+ applyLang(savedLang);
+
+ themeBtn.addEventListener('click', function(){ applyTheme(currentTheme==='dark'?'light':'dark'); });
+ langBtn.addEventListener('click', function(){ applyLang(currentLang==='en'?'pt':'en'); });
+
+ var nav=document.getElementById('nav');
+ window.addEventListener('scroll', function(){
+ if(window.scrollY>20){ nav.classList.add('scrolled'); } else { nav.classList.remove('scrolled'); }
+ });
+
+ var burger=document.getElementById('burger'), menu=document.getElementById('menu');
+ burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+ menu.addEventListener('click', function(e){ if(e.target.tagName==='A'){ menu.classList.remove('open'); } });
+
+ var io=new IntersectionObserver(function(entries){
+ entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+ }, {threshold:0.12});
+ document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+
+</body>
+</html>
